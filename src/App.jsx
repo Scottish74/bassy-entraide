@@ -144,7 +144,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 /* LOGIN */
 .lw{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:20px;}
 .lbg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.28) saturate(1.3);}
-.lc{position:relative;z-index:1;background:rgba(255,255,255,0.97);border-radius:26px;padding:32px 26px;width:100%;max-width:400px;box-shadow:0 24px 70px rgba(0,0,0,0.45);animation:sU .5s cubic-bezier(.34,1.56,.64,1);}
+.lc{position:relative;z-index:1;background:rgba(255,255,255,0.97);border-radius:26px;padding:32px 16px;width:100%;max-width:400px;box-sizing:border-box;box-shadow:0 24px 70px rgba(0,0,0,0.45);animation:sU .5s cubic-bezier(.34,1.56,.64,1);}
 @keyframes sU{from{opacity:0;transform:translateY(30px) scale(.95);}to{opacity:1;transform:translateY(0) scale(1);}}
 .llogo{width:140px;height:140px;object-fit:contain;display:block;margin:0 auto 8px;animation:fl 3s ease-in-out infinite;}
 @keyframes fl{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
