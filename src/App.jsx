@@ -132,7 +132,7 @@ const getConvKey = (a,b) => [Math.min(a,b),Math.max(a,b)].join("-");
 // ── STYLES ────────────────────────────────────────────────
 const STYLES = `
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@600;700&display=swap');
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0;max-width:100%;}
 :root{
   color-scheme: light;
   --g1:#1e4d35;--g2:#2d7a52;--g3:#4aab78;--gp:#d4ede1;
