@@ -152,7 +152,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 .ls{font-size:12px;color:var(--muted);font-weight:600;text-align:center;margin-top:3px;}
 .div{height:1px;background:linear-gradient(90deg,transparent,#ddeee5,transparent);margin:18px 0;}
 .fl_{font-size:11px;font-weight:800;color:var(--g2);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:6px;}
-.fi{width:100%;padding:12px 14px;border:1.5px solid #c8ddd0;border-radius:12px;font-size:14px;font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);outline:none;transition:border .2s,box-shadow .2s;}
+.fi{width:100%;padding:12px 14px;border:1.5px solid #c8ddd0;border-radius:12px;font-size:16px;font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);outline:none;transition:border .2s,box-shadow .2s;}
 .fi:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(45,122,82,.1);background:#fff;}
 .err{background:#fef2f2;border:1px solid #fca5a5;border-radius:10px;padding:10px 13px;font-size:13px;color:#b91c1c;font-weight:600;margin-bottom:13px;}
 .bm{width:100%;padding:14px;background:linear-gradient(135deg,var(--g2),var(--g1));color:#fff;border:none;border-radius:12px;font-size:14px;font-family:'Nunito',sans-serif;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(30,77,53,.28);transition:all .2s;margin-bottom:12px;}
