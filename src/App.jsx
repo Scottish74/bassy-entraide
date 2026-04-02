@@ -1720,17 +1720,7 @@ export default function Root() {
     // Vérifier si une session existe déjà
     const initSession = async () => {
     try {
-  await fetch("/api/send-email", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      type: "welcome",
-      email: userData.email,
-      prenom: userData.prenom || userData.pseudo,
-      nom: userData.nom || ""
-    })
-  });
-} catch(e) { console.log("Email non envoyé:", e); }
+
       } finally {
         clearTimeout(timeout);
         setLoading(false);
