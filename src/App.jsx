@@ -772,35 +772,19 @@ function CguPage({ onAccept, onBack, userData }) {
                   verified: false,
                   role: "membre"
                 });
-                // Notifier l'admin par email via Resend
+                // Envoyer emails via Vercel Function
                 try {
-                  await fetch("https://api.resend.com/emails", {
+                  await fetch("/api/send-email", {
                     method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                      "Authorization": "Bearer re_YcPUZMAV_6Uwuvad3doFWKdnavLJJf1G1"
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                      from: "Bassy Entraide <noreply@bassy-entraide.fr>",
-                      to: "franscotton@gmail.com",
-                      subject: "🏡 Nouvelle inscription — Bassy Entraide",
-                      html: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:20px;">
-                        <h2 style="color:#1e4d35;">🏡 Nouvelle inscription</h2>
-                        <div style="background:#f7faf8;border-radius:12px;padding:20px;border:1px solid #c8ddd0;">
-                          <p><strong>Pseudo :</strong> ${userData.pseudo}</p>
-                          <p><strong>Secteur :</strong> ${userData.secteur}</p>
-                          <p><strong>Email :</strong> ${userData.email}</p>
-                          <p style="margin-top:16px;">
-                            <a href="https://bassy-entraide.fr" style="background:#1e4d35;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;">
-                              Valider le membre →
-                            </a>
-                          </p>
-                        </div>
-                        <p style="color:#5a7a65;font-size:11px;text-align:center;margin-top:16px;">Bassy Entraide · bassy-entraide.fr</p>
-                      </div>`
+                      type: "welcome",
+                      email: userData.email,
+                      prenom: userData.prenom || userData.pseudo,
+                      nom: userData.nom || ""
                     })
                   });
-                } catch(e) { console.log("Email admin non envoyé:", e); }
+                } catch(e) { console.log("Email non envoyé:", e); }
               }
             }
             onAccept();
@@ -1735,26 +1719,18 @@ export default function Root() {
 
     // Vérifier si une session existe déjà
     const initSession = async () => {
-      try {
-        const { data:{ session } } = await supabase.auth.getSession();
-        if(session){
-          const { data: profile } = await supabase.from("profiles").select("*").eq("id",session.user.id).single();
-          const u = {
-            id: session.user.id,
-            name: profile ? (profile.name || `${profile.prenom||""}`.trim() || session.user.email) : session.user.email,
-            avatar: profile ? (profile.name?.[0]||profile.prenom?.[0]||"?").toUpperCase() : "?",
-            email: session.user.email,
-            role: profile?.role||"membre",
-            verified: profile?.verified||false,
-            since: profile?.created_at ? new Date(profile.created_at).toLocaleDateString("fr-FR",{month:"short",year:"numeric"}) : "",
-          };
-          console.log("Session restaurée, rôle:", u.role);
-          setUser(u); setScreen("app");
-        }
-      } catch(err) {
-        console.error("Erreur récupération session:", err);
-        // Session corrompue → nettoyage et retour login
-        try { await supabase.auth.signOut(); } catch(_){}
+    try {
+  await fetch("/api/send-email", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      type: "welcome",
+      email: userData.email,
+      prenom: userData.prenom || userData.pseudo,
+      nom: userData.nom || ""
+    })
+  });
+} catch(e) { console.log("Email non envoyé:", e); }
       } finally {
         clearTimeout(timeout);
         setLoading(false);
