@@ -1220,7 +1220,7 @@ function MainApp({ user, onLogout }) {
 
       {/* ── LIGNE 1 : 4 boutons de services + Proposer ── */}
       <div className="row-block">
-        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr) 1fr",gap:5}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(5,minmax(0,1fr))",gap:4}}>
          <Btn icon="➡️" label="Trajet"   notif={catN("trajets")}  active={subView==="feed"&&filterCat==="trajets"}  onClick={()=>goCat("trajets")}/>
           <Btn icon="🛒" label="Courses"  notif={catN("courses")}  active={subView==="feed"&&filterCat==="courses"}  onClick={()=>goCat("courses")}/>
           <Btn icon="♻️" label="Dons"     notif={catN("dons")}     active={subView==="feed"&&filterCat==="dons"}     onClick={()=>goCat("dons")}/>
