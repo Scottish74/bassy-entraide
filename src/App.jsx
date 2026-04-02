@@ -1236,10 +1236,10 @@ function MainApp({ user, onLogout }) {
       {/* ── LIGNE 1 : 4 boutons de services + Proposer ── */}
       <div className="row-block">
         <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr) 1fr",gap:5}}>
-          <Btn icon="🚕" label="Trajet"   notif={catN("trajets")}  active={subView==="feed"&&filterCat==="trajets"}  onClick={()=>goCat("trajets")}/>
-          <Btn icon="🧺" label="Courses"  notif={catN("courses")}  active={subView==="feed"&&filterCat==="courses"}  onClick={()=>goCat("courses")}/>
+         <Btn icon="➡️" label="Trajet"   notif={catN("trajets")}  active={subView==="feed"&&filterCat==="trajets"}  onClick={()=>goCat("trajets")}/>
+          <Btn icon="🛒" label="Courses"  notif={catN("courses")}  active={subView==="feed"&&filterCat==="courses"}  onClick={()=>goCat("courses")}/>
           <Btn icon="♻️" label="Dons"     notif={catN("dons")}     active={subView==="feed"&&filterCat==="dons"}     onClick={()=>goCat("dons")}/>
-          <Btn icon="🏡" label="Vie locale" notif={nNews}          active={subView==="news"}                          onClick={()=>goSub("news")}/>
+          <Btn icon="🔔" label="Vie locale" notif={nNews}          active={subView==="news"}                          onClick={()=>goSub("news")}/>
           <Btn icon="＋" label="Proposer" propose onClick={()=>{setSubView("feed");setFilterCat("all");setShowPublish(true);}}/>
         </div>
       </div>
@@ -1251,7 +1251,7 @@ function MainApp({ user, onLogout }) {
         {[
           {icon:"✨",  label:"Tout",          notif:nOffers,  act:subView==="feed"&&filterCat==="all"&&!showPublish, fn:()=>goSub("feed")},
           {icon:"🚨",  label:"Vigilance",     notif:nAlerts,  act:subView==="vigilance",                             fn:()=>goSub("vigilance")},
-          {icon:"📍",  label:"Entreprises",   notif:0,        act:subView==="entreprises",                           fn:()=>goSub("entreprises")},
+          {icon:"🛠️",  label:"Entreprises",   notif:0,        act:subView==="entreprises",                           fn:()=>goSub("entreprises")},
           {icon:"💬",  label:"Messages",      notif:nMsgs,    act:subView==="messages",                              fn:()=>goSub("messages")},
         ].map(b=>(
           <button key={b.label} className={`hnav-btn ${b.act?"act":""}`} onClick={b.fn}>
