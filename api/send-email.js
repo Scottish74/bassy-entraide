@@ -57,9 +57,9 @@ export default async function handler(req, res) {
       });
     }
 
-    res.status(200).json({ ok: true });
+    res.status(200).json({ ok: true, sent: true });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: err.message });
-  }
+  console.error("RESEND ERROR:", JSON.stringify(err));
+  res.status(500).json({ error: err.message });
+}
 }
