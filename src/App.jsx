@@ -132,7 +132,7 @@ const getConvKey = (a,b) => [Math.min(a,b),Math.max(a,b)].join("-");
 // ── STYLES ────────────────────────────────────────────────
 const STYLES = `
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@600;700&display=swap');
-*{box-sizing:border-box;margin:0;padding:0;max-width:100%;}
+*{box-sizing:border-box;margin:0;padding:0;max-width:100%;outline:1px solid red;}
 input,textarea,select{font-size:16px !important;}
 :root{
   color-scheme: light;
@@ -178,7 +178,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 .sp{background:rgba(255,255,255,.14);border-radius:11px;padding:7px 10px;text-align:center;flex:1;border:1px solid rgba(255,255,255,.2);}
 
 /* ── RANGÉE BOUTONS (style unifié) ── */
-.row-block{padding:8px 10px;background:#fff;border-bottom:1px solid #ddeee5;}
+.row-block{padding:8px 4px;background:#fff;border-bottom:1px solid #ddeee5;}
 
 /* Bouton grille générique */
 .gb-sm{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:7px 3px;border-radius:11px;border:2px solid transparent;cursor:pointer;transition:all .18s;background:var(--stone);position:relative;}
@@ -231,7 +231,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 .br_{background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;border:none;border-radius:11px;padding:8px 14px;font-size:12px;font-family:'Nunito',sans-serif;font-weight:800;cursor:pointer;}
 .stitle{font-family:'Fraunces',serif;font-size:20px;color:var(--g1);font-weight:700;margin-bottom:3px;}
 .ssub{font-size:13px;color:var(--muted);margin-bottom:14px;}
-.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--g1);color:#fff;padding:12px 20px;border-radius:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;z-index:999;box-shadow:0 6px 22px rgba(30,77,53,.35);animation:ti .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--g1);color:#fff;padding:12px 20px;border-radius:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;z-index:999;box-shadow:0 6px 22px rgba(30,77,53,.35);animation:ti .3s cubic-bezier(.34,1.56,.64,1);white-space:normal;}
 @keyframes ti{from{opacity:0;transform:translateX(-50%) translateY(14px) scale(.9);}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}}
 .fu{animation:fu .35s ease both;}
 @keyframes fu{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
@@ -276,7 +276,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 .tdd:nth-child(3){animation-delay:.4s;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}} @keyframes tb{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-5px);}}
 /* Guide iOS */
-.ios-guide{position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;padding:20px 18px 32px;box-shadow:0 -4px 30px rgba(0,0,0,.15);z-index:400;animation:slideUp .3s cubic-bezier(.34,1.2,.64,1);}
+.ios-guide{position:fixed;bottom:0;left:0;right:0;width:100%;box-sizing:border-box;background:#fff;border-radius:20px 20px 0 0;padding:20px 18px 32px;box-shadow:0 -4px 30px rgba(0,0,0,.15);z-index:400;animation:slideUp .3s cubic-bezier(.34,1.2,.64,1);overflow:hidden;}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .ios-step{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f0f5f2;}
 .ios-step:last-child{border-bottom:none;}
@@ -291,7 +291,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 
 /* Bandeau notifications */
 .notif-banner{display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(135deg,var(--b1),var(--b2));color:#fff;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;}
-.notif-banner button{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:8px;color:#fff;font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;padding:5px 10px;cursor:pointer;white-space:nowrap;}
+.notif-banner button{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:8px;color:#fff;font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;padding:5px 10px;cursor:pointer;white-space:normal;}
 .notif-banner button:hover{background:rgba(255,255,255,.3);}
 .notif-banner .close{background:none;border:none;color:rgba(255,255,255,.6);font-size:16px;cursor:pointer;padding:0 4px;margin-left:auto;}
 
@@ -319,9 +319,9 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 .reject-btn{background:#fef2f2;color:#dc2626;border:1px solid #fca5a5;border-radius:9px;padding:6px 12px;font-size:11px;font-family:'Nunito',sans-serif;font-weight:800;cursor:pointer;}
 
 /* ── BARRE NAV HORIZONTALE (style screenshot) ── */
-.hnav{display:flex;background:#fff;border-bottom:2px solid #e8f0eb;overflow-x:auto;scrollbar-width:none;padding:0 4px;-webkit-overflow-scrolling:touch;}
+.hnav{display:flex;background:#fff;border-bottom:2px solid #e8f0eb;overflow-x:hidden;scrollbar-width:none;padding:0 2px;}
 .hnav::-webkit-scrollbar{display:none;}
-.hnav-btn{display:flex;align-items:center;gap:5px;padding:10px 8px;background:transparent;border:none;border-bottom:3px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;position:relative;flex-shrink:0;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:var(--muted);}
+.hnav-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 0;background:transparent;border:none;border-bottom:3px solid transparent;cursor:pointer;transition:all .18s;position:relative;flex:1;font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;color:var(--muted);}
 .hnav-btn:hover{color:var(--g1);background:var(--gp);}
 .hnav-btn.act{color:var(--g1);border-bottom-color:var(--g2);}
 .hnav-btn .hico{font-size:17px;line-height:1;}
@@ -583,7 +583,7 @@ function LoginPage({ onLogin, onRequest }) {
         <div className="ls">Bassy · Haute-Savoie 74 · Réseau de confiance</div>
         <div className="div"/>
         {err && <div className="err">⚠️ {err}</div>}
-        <form onSubmit={e=>{e.preventDefault();doLogin();}} autoComplete="on" style={{width:"100%"}}>
+        <form onSubmit={e=>{e.preventDefault();doLogin();}} autoComplete="off" style={{width:"100%"}}>
         <div style={{marginBottom:12}}>
           <label className="fl_">Email</label>
           <input className="fi" type="email" placeholder="votre@email.fr" value={email}
@@ -1065,9 +1065,9 @@ function MainApp({ user, onLogout }) {
       taken: 0,
     }).select().single();
     if(error){ showToast("❌ Erreur lors de la publication."); console.error(error); return; }
-    const item={id:data.id,authorId:user.id,category:newOffer.category,title:newOffer.title,description:newOffer.description,date:newOffer.date||"À définir",time:newOffer.time||"À convenir",spots:parseInt(newOffer.spots)||1,taken:0};
+    const item={id:data.id,authorId:user.id,author:{id:user.id,name:user.name,avatar:user.avatar,verified:user.verified,role:user.role},category:newOffer.category,title:newOffer.title,description:newOffer.description,date:newOffer.date||"À définir",time:newOffer.time||"À convenir",spots:parseInt(newOffer.spots)||1,taken:0,createdAt:Date.now()};
     setOffers(p=>[item,...p]); setSeenOff(p=>new Set([...p,item.id]));
-    showToast("🎉 Service publié !"); setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,secteur:"Tout le village"}); setShowPublish(false);
+    showToast("🎉 Service publié !"); setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,secteur:"Tout le village"}); setSubView("feed"); setSubView("feed"); setFilterCat("all"); setShowPublish(false);
     sendLocalNotif("🌿 Nouveau service — Bassy Entraide", item.title);
     // Badge sur l'icône app
     if(navigator.setAppBadge) navigator.setAppBadge(1);
@@ -1232,7 +1232,7 @@ function MainApp({ user, onLogout }) {
 
 
       {/* ── BARRE NAV HORIZONTALE ── */}
-      <div className="hnav" style={{justifyContent:"center"}}>
+      <div className="hnav">
         {[
           {icon:"✨",  label:"Tout",          notif:nOffers,  act:subView==="feed"&&filterCat==="all"&&!showPublish, fn:()=>goSub("feed")},
           {icon:"🚨",  label:"Vigilance",     notif:nAlerts,  act:subView==="vigilance",                             fn:()=>goSub("vigilance")},
@@ -1291,7 +1291,7 @@ function MainApp({ user, onLogout }) {
           )}
 
           {filtered.map(offer=>{
-            const author = offer.author || userOf(offer.authorId);
+            const author = offer.author || userOf(offer.authorId) || {name:"Voisin",avatar:"?",verified:false,role:"membre"};
             const c=SERVICE_CATS.find(x=>x.id===offer.category)||SERVICE_CATS[0];
             const pct=Math.round((offer.taken/offer.spots)*100);
             const isFull=offer.taken>=offer.spots;
