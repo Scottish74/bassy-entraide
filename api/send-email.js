@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     if (type === 'welcome') {
       await resend.emails.send({
         from: 'Bassy Entraide <noreply@send.bassy-entraide.fr>',
-        to: email,
+        to: [email],
         subject: '🏡 Bienvenue dans Bassy Entraide !',
         html: `
           <div style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:520px;margin:0 auto;background:#f7faf8;border-radius:18px;overflow:hidden;border:1px solid #ddeee5;">
