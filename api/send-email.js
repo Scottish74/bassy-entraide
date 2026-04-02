@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   try {
     if (type === 'welcome') {
       const r1 = await resend.emails.send({
-        from: 'Bassy Entraide <noreply@send.bassy-entraide.fr>',
+        from: 'Bassy Entraide <noreply@bassy-entraide.fr>',
         to: [email],
         subject: 'Bienvenue dans Bassy Entraide !',
         html: '<p>Bonjour ' + prenom + ', votre inscription est bien reçue !</p>'
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       console.log("Email membre:", JSON.stringify(r1));
 
       const r2 = await resend.emails.send({
-        from: 'Bassy Entraide <noreply@send.bassy-entraide.fr>',
+        from: 'Bassy Entraide <noreply@bassy-entraide.fr>',
         to: ['franckscotton@gmail.com'],
         subject: 'Nouvelle inscription - ' + prenom + ' ' + nom,
         html: '<p>Nouveau membre : ' + prenom + ' ' + nom + ' (' + email + ')</p>'
