@@ -133,6 +133,7 @@ const getConvKey = (a,b) => [Math.min(a,b),Math.max(a,b)].join("-");
 const STYLES = `
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;max-width:100%;}
+input,textarea,select{font-size:16px !important;}
 :root{
   color-scheme: light;
   --g1:#1e4d35;--g2:#2d7a52;--g3:#4aab78;--gp:#d4ede1;
@@ -265,7 +266,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 .bts{font-size:10px;opacity:.6;margin-top:3px;font-weight:600;}
 .bb.m .bts{text-align:right;}
 .cir{padding:10px 13px;padding-bottom:max(10px,env(safe-area-inset-bottom));background:#fff;border-top:1px solid #ddeee5;display:flex;gap:8px;align-items:flex-end;flex-shrink:0;}
-.cin{flex:1;padding:10px 14px;border:1.5px solid #c8ddd0;border-radius:20px;font-size:13px;font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);outline:none;resize:none;max-height:85px;transition:border .2s;}
+.cin{flex:1;padding:10px 14px;border:1.5px solid #c8ddd0;border-radius:20px;font-size:16px;font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);outline:none;resize:none;max-height:85px;transition:border .2s;}
 .cin:focus{border-color:var(--g2);background:#fff;}
 .csb{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--b1));border:none;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(30,77,53,.25);transition:transform .15s;}
 .csb:hover{transform:scale(1.08);}
