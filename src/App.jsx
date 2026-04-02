@@ -140,8 +140,7 @@ const STYLES = `
   --cream:#f7faf8;--stone:#e8f0eb;--text:#1a2e22;--muted:#5a7a65;
 }
 body{background:var(--cream);font-family:'Nunito',sans-serif;-webkit-text-size-adjust:100%;color-scheme:light;}
-html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;max-width:100vw;}
-
+html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-width:100%;}
 /* LOGIN */
 .lw{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:20px;}
 .lbg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.28) saturate(1.3);}
