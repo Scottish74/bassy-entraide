@@ -320,7 +320,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 /* ── BARRE NAV HORIZONTALE (style screenshot) ── */
 .hnav{display:flex;background:#fff;border-bottom:2px solid #e8f0eb;overflow-x:auto;scrollbar-width:none;padding:0 4px;-webkit-overflow-scrolling:touch;}
 .hnav::-webkit-scrollbar{display:none;}
-.hnav-btn{display:flex;align-items:center;gap:5px;padding:12px 13px;background:transparent;border:none;border-bottom:3px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;position:relative;flex-shrink:0;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:var(--muted);}
+.hnav-btn{display:flex;align-items:center;gap:5px;padding:10px 8px;background:transparent;border:none;border-bottom:3px solid transparent;cursor:pointer;transition:all .18s;white-space:nowrap;position:relative;flex-shrink:0;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:var(--muted);}
 .hnav-btn:hover{color:var(--g1);background:var(--gp);}
 .hnav-btn.act{color:var(--g1);border-bottom-color:var(--g2);}
 .hnav-btn .hico{font-size:17px;line-height:1;}
