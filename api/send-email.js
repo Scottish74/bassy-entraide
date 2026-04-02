@@ -5,8 +5,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 
-  const { type, email, prenom, nom } = req.body;
-
+ const { type, email, prenom, nom } = req.body;
+  console.log("send-email appelé:", { type, email, prenom, nom });
   try {
     if (type === 'welcome') {
       await resend.emails.send({
