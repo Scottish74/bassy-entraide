@@ -1069,8 +1069,7 @@ function MainApp({ user, onLogout }) {
       image_url: newOffer.image||null,
     }).select().single();
     if(error){ showToast("❌ Erreur lors de la publication."); console.error(error); return; }
-    const item={id:data.id,authorId:user.id,author:{id:user.id,name:user.name,avatar:user.avatar,verified:user.verified,role:user.role},category:newOffer.category,title:newOffer.title,description:newOffer.description,date:newOffer.date||"À définir",time:newOffer.time||"À convenir",spots:parseInt(newOffer.spots)||1,taken:0,image:newOffer.image||null,createdAt:Date.now()};
-    setOffers(p=>[item,...p]); setSeenOff(p=>new Set([...p,item.id]));
+role:user.role,badges:user.badges||[]},category    setOffers(p=>[item,...p]); setSeenOff(p=>new Set([...p,item.id]));
 setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,secteur:"Tout le village",image:null});
     sendLocalNotif("🌿 Nouveau service — Bassy Entraide", item.title);
     // Badge premier service
