@@ -771,7 +771,8 @@ function CguPage({ onAccept, onBack, userData }) {
                   nom: "",
                   village: userData.secteur||"Bassy",
                   verified: false,
-                  role: "membre"
+                  role: "membre",
+                  badges: ["🌱 Nouveau voisin"]
                 });
                 // Envoyer emails via Vercel Function
                 try {
