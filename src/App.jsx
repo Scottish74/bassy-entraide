@@ -1715,7 +1715,32 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
               </div>
             );
           })}
-          <div style={{marginTop:20,textAlign:"center"}}>
+          <div style={{marginTop:20,background:"#fff",borderRadius:16,padding:18,border:"1px solid #ddeee5"}}>
+            <div style={{fontFamily:"'Fraunces',serif",fontSize:16,fontWeight:700,color:"var(--g1)",marginBottom:12}}>🏅 Mes badges</div>
+            {user.badges?.length>0?(
+              <div style={{display:"flex",flexDirection:"column",gap:10}}>
+                {user.badges.map(b=>{
+                  const info = {
+                    "🌱 Nouveau voisin": "Attribué à l'inscription — bienvenue dans la communauté !",
+                    "⭐ Membre fondateur": "Inscrit avant le 1er juillet 2026 — merci d'avoir rejoint l'aventure dès le début !",
+                    "🤝 Premier service": "Premier service publié — tu contribues à l'entraide du village !",
+                  }[b] || "Badge spécial";
+                  return (
+                    <div key={b} style={{display:"flex",alignItems:"flex-start",gap:10,background:"var(--stone)",borderRadius:12,padding:"10px 14px"}}>
+                      <span style={{fontSize:22}}>{b.split(" ")[0]}</span>
+                      <div>
+                        <div style={{fontWeight:800,fontSize:13,color:"var(--g1)"}}>{b.split(" ").slice(1).join(" ")}</div>
+                        <div style={{fontSize:12,color:"var(--muted)",marginTop:2}}>{info}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ):(
+              <div style={{fontSize:13,color:"var(--muted)",textAlign:"center"}}>Pas encore de badge — publie ton premier service !</div>
+            )}
+          </div>
+          <div style={{marginTop:14,textAlign:"center"}}>
             <button style={{background:"none",border:"1.5px solid #c8ddd0",borderRadius:10,padding:"8px 16px",fontFamily:"'Nunito',sans-serif",fontSize:13,fontWeight:700,color:"var(--muted)",cursor:"pointer"}} onClick={onLogout}>🚪 Se déconnecter</button>
           </div>
         </div>)}
