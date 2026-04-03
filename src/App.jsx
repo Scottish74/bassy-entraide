@@ -569,6 +569,7 @@ function LoginPage({ onLogin, onRequest }) {
       email: data.user.email,
       role: profile?.role || "membre",
       verified: profile?.verified || false,
+      badges: profile?.badges || [],
       since: profile?.created_at ? new Date(profile.created_at).toLocaleDateString("fr-FR", {month:"short", year:"numeric"}) : "",
     };
     console.log("Connexion réussie, rôle:", u.role);
