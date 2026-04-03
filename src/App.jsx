@@ -814,7 +814,7 @@ function MainApp({ user, onLogout }) {
   const [offersLoading, setOffersLoading] = useState(true);
   const [nVoisins, setNVoisins] = useState(0);
   const [seenOff,    setSeenOff]    = useState(new Set(SEEN_OFFERS));
-  const [newOffer,   setNewOffer]   = useState({title:"",category:"trajets",description:"",date:"",time:"",spots:1,secteur:"Tout le village"});
+  const [newOffer,   setNewOffer]   = useState({title:"",category:"trajets",description:"",date:"",time:"",spots:1,secteur:"Tout le village",image:null});
 
   const [conversations, setConversations] = useState(INITIAL_CONVS);
   const [activeConv,    setActiveConv]    = useState(null);
@@ -874,6 +874,7 @@ function MainApp({ user, onLogout }) {
           time: o.time,
           spots: o.spots || 1,
           taken: o.taken || 0,
+          image: o.image_url || null,
           createdAt: new Date(o.created_at).getTime(),
         })));
       }
@@ -1063,12 +1064,12 @@ function MainApp({ user, onLogout }) {
       time: newOffer.time||"",
       spots: parseInt(newOffer.spots)||1,
       taken: 0,
+      image_url: newOffer.image||null,
     }).select().single();
     if(error){ showToast("❌ Erreur lors de la publication."); console.error(error); return; }
-    const item={id:data.id,authorId:user.id,author:{id:user.id,name:user.name,avatar:user.avatar,verified:user.verified,role:user.role},category:newOffer.category,title:newOffer.title,description:newOffer.description,date:newOffer.date||"À définir",time:newOffer.time||"À convenir",spots:parseInt(newOffer.spots)||1,taken:0,createdAt:Date.now()};
+    const item={id:data.id,authorId:user.id,author:{id:user.id,name:user.name,avatar:user.avatar,verified:user.verified,role:user.role},category:newOffer.category,title:newOffer.title,description:newOffer.description,date:newOffer.date||"À définir",time:newOffer.time||"À convenir",spots:parseInt(newOffer.spots)||1,taken:0,image:newOffer.image||null,createdAt:Date.now()};
     setOffers(p=>[item,...p]); setSeenOff(p=>new Set([...p,item.id]));
-    showToast("🎉 Service publié !"); setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,secteur:"Tout le village"}); setSubView("feed"); setSubView("feed"); setFilterCat("all"); setShowPublish(false);
-    sendLocalNotif("🌿 Nouveau service — Bassy Entraide", item.title);
+setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,secteur:"Tout le village",image:null})    sendLocalNotif("🌿 Nouveau service — Bassy Entraide", item.title);
     // Badge sur l'icône app
     if(navigator.setAppBadge) navigator.setAppBadge(1);
     if("setAppBadge" in navigator) navigator.setAppBadge(1).catch(()=>{});
@@ -1282,6 +1283,31 @@ function MainApp({ user, onLogout }) {
                 </div>
                 <div className="g2">
                   <div><label className="fl_">Date</label><input className="fi" type="date" value={newOffer.date} onChange={e=>setNewOffer({...newOffer,date:e.target.value})}/></div>
+                {newOffer.category==="dons"&&(
+                  <div>
+                    <label className="fl_">Photo du don</label>
+                    {newOffer.image
+                      ? <div style={{position:"relative"}}>
+                          <img src={newOffer.image} alt="" style={{width:"100%",borderRadius:11,maxHeight:160,objectFit:"cover"}}/>
+                          <button onClick={()=>setNewOffer({...newOffer,image:null})} style={{position:"absolute",top:7,right:7,background:"rgba(0,0,0,.5)",border:"none",borderRadius:"50%",width:24,height:24,color:"#fff",cursor:"pointer",fontSize:12}}>✕</button>
+                        </div>
+                      : <div className="uz" onClick={()=>document.getElementById('don-img-input').click()}>
+                          <div style={{fontSize:28,marginBottom:4}}>📷</div>
+                          <div style={{fontSize:12,color:"var(--muted)"}}>Ajouter une photo</div>
+                        </div>
+                    }
+                    <input id="don-img-input" type="file" accept="image/*" style={{display:"none"}} onChange={async e=>{
+                      const file = e.target.files[0];
+                      if(!file) return;
+                      const ext = file.name.split('.').pop();
+                      const path = `${user.id}/${Date.now()}.${ext}`;
+                      const { error } = await supabase.storage.from('offers-images').upload(path, file);
+                      if(error){ showToast("❌ Erreur upload image"); return; }
+                      const { data: urlData } = supabase.storage.from('offers-images').getPublicUrl(path);
+                      setNewOffer({...newOffer, image: urlData.publicUrl});
+                    }}/>
+                  </div>
+                )}
                   <div><label className="fl_">Heure</label><input className="fi" type="time" value={newOffer.time} onChange={e=>setNewOffer({...newOffer,time:e.target.value})}/></div>
                 </div>
                 <div><label className="fl_">Places disponibles</label><input className="fi" type="number" min={1} max={20} value={newOffer.spots} onChange={e=>setNewOffer({...newOffer,spots:e.target.value})}/></div>
@@ -1312,6 +1338,7 @@ function MainApp({ user, onLogout }) {
                   <span className="cb">{c.icon} {c.label}</span>
                 </div>
                 <h3 style={{fontFamily:"'Fraunces',serif",fontSize:15,fontWeight:600,marginBottom:6,lineHeight:1.35}}>{offer.title}</h3>
+                {offer.image&&<div className="news-img-wrap" style={{marginBottom:10}}><img src={offer.image} alt="" className="news-img"/></div>}
                 <p style={{fontSize:13,color:"#4a6255",lineHeight:1.6,marginBottom:11}}>{offer.description}</p>
                 <div style={{display:"flex",gap:13,marginBottom:11,flexWrap:"wrap"}}>
                   {offer.secteur&&offer.secteur!=="Tout le village"&&<span style={{fontSize:12,color:"#2b6cb0",fontWeight:700,background:"#ebf4ff",borderRadius:20,padding:"2px 8px"}}>📍 {offer.secteur}</span>}
