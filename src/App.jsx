@@ -854,7 +854,7 @@ function MainApp({ user, onLogout }) {
       setOffersLoading(true);
       const { data, error } = await supabase
         .from("offers")
-        .select("id, author_id, category, title, description, date, time, spots, taken, created_at, profiles(name, prenom, nom, avatar, verified, role)")
+.select("id, author_id, category, title, description, date, time, spots, taken, created_at, image_url, profiles(name, prenom, nom, avatar, verified, role, badges)")
         .order("created_at", { ascending: false });
       if(!error && data) {
         setOffers(data.map(o => ({
@@ -866,7 +866,8 @@ function MainApp({ user, onLogout }) {
             avatar: `${(o.profiles.prenom||"?")[0]}${(o.profiles.nom||"")[0]||""}`.toUpperCase(),
             verified: o.profiles.verified || false,
             role: o.profiles.role || "membre",
-          } : {id: o.author_id, name:"Voisin", avatar:"??", verified:false, role:"membre"},
+            badges: o.profiles.badges || [],
+          } : {id: o.author_id, name:"Voisin", avatar:"??", verified:false, role:"membre", badges:[]},
           category: o.category,
           title: o.title,
           description: o.description,
