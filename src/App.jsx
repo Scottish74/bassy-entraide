@@ -572,7 +572,7 @@ function LoginPage({ onLogin, onRequest }) {
       badges: profile?.badges || [],
       since: profile?.created_at ? new Date(profile.created_at).toLocaleDateString("fr-FR", {month:"short", year:"numeric"}) : "",
     };
-console.log("Connexion réussie, rôle:", u.role, "badges:", u.badges);    onLogin(u);
+console.log("Connexion réussie, rôle:", u.role);    onLogin(u);
   };
   return (
     <div className="lw">
