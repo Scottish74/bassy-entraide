@@ -1071,6 +1071,10 @@ function MainApp({ user, onLogout }) {
     setOffers(p=>[item,...p]); setSeenOff(p=>new Set([...p,item.id]));
 setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,secteur:"Tout le village",image:null});
     sendLocalNotif("🌿 Nouveau service — Bassy Entraide", item.title);
+    // Badge premier service
+    if(!user.badges?.includes("🤝 Premier service")){
+      await supabase.from("profiles").update({badges:[...(user.badges||[]),"🤝 Premier service"]}).eq("id",user.id);
+    }
     // Badge sur l'icône app
     if(navigator.setAppBadge) navigator.setAppBadge(1);
     if("setAppBadge" in navigator) navigator.setAppBadge(1).catch(()=>{});
@@ -1333,6 +1337,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                     <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
                       <span style={{fontWeight:800,fontSize:13}}>{author.name}</span>
                       <span className="vb">✓</span>
+                      {author.badges?.map(b=><span key={b} style={{fontSize:10,fontWeight:700,background:"#f0faf5",color:"var(--g2)",borderRadius:20,padding:"2px 7px",border:"1px solid #b0d9c0"}}>{b}</span>)}
                       {isNew&&<span className="newb">✦ Nouveau</span>}
                       {isMine&&<span style={{fontSize:10,fontWeight:800,background:"#fff3cd",color:"#92620a",borderRadius:20,padding:"2px 7px"}}>Votre offre</span>}
                     </div>
