@@ -1283,6 +1283,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                 </div>
                 <div className="g2">
                   <div><label className="fl_">Date</label><input className="fi" type="date" value={newOffer.date} onChange={e=>setNewOffer({...newOffer,date:e.target.value})}/></div>
+                </div>
                 {newOffer.category==="dons"&&(
                   <div>
                     <label className="fl_">Photo du don</label>
