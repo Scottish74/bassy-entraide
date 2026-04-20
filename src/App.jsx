@@ -1240,7 +1240,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
 
 
       {/* ── BARRE NAV HORIZONTALE ── */}
-      <div className="hnav">
+      <div className="hnav" style={{display: subView==="news" ? "none" : ""}}>
         {[
           {icon:"✨",  label:"Tout",          notif:nOffers,  act:subView==="feed"&&filterCat==="all"&&!showPublish, fn:()=>goSub("feed")},
           {icon:"🚨",  label:"Vigilance",     notif:nAlerts,  act:subView==="vigilance",                             fn:()=>goSub("vigilance")},
@@ -1482,17 +1482,24 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                 </div>
               </div>
             )}
-            {agendaItems.map((ev,i)=>(
-              <div key={i} className="card" style={{display:"flex",gap:12}}>
-                <div style={{fontSize:24,flexShrink:0,marginTop:2}}>{ev.icon}</div>
-                <div>
-                  <div style={{fontSize:11,fontWeight:800,color:"var(--b2)",marginBottom:4}}>📅 {ev.date}</div>
-                  <div style={{fontFamily:"'Fraunces',serif",fontSize:14,fontWeight:700,marginBottom:5,lineHeight:1.3}}>{ev.titre}</div>
-                  <p style={{fontSize:13,color:"#4a6255",lineHeight:1.6}}>{ev.desc}</p>
-                </div>
-              </div>
-            ))}  
-          </>}
+           {agendaItems.map((ev,i)=>(
+  <div key={i} className="card" style={{display:"flex",gap:12,position:"relative"}}>
+    {user.role==="admin" && (
+      <button className="del-btn" title="Supprimer"
+        style={{position:"absolute",top:8,right:8}}
+        onClick={()=>setAgendaItems(agendaItems.filter((_,j)=>j!==i))}>
+        🗑️
+      </button>
+    )}
+    <div style={{fontSize:24,flexShrink:0,marginTop:2}}>{ev.icon}</div>
+    <div>
+      <div style={{fontSize:11,fontWeight:800,color:"var(--b2)",marginBottom:4}}>📅 {ev.date}</div>
+      <div style={{fontFamily:"'Fraunces',serif",fontSize:14,fontWeight:700,marginBottom:5,lineHeight:1.3}}>{ev.titre}</div>
+      <p style={{fontSize:13,color:"#4a6255",lineHeight:1.6}}>{ev.desc}</p>
+    </div>
+  </div>
+))}  
+</>}
 
           {newsTab==="assos"&&<>
             <div className="stitle" style={{marginBottom:4}}>Associations</div>
