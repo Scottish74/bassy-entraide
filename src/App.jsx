@@ -188,7 +188,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 .gb-sm .gl-sm{font-size:9px;font-weight:800;color:var(--text);text-align:center;line-height:1.2;white-space:nowrap;}
 .gb{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:2px;padding:9px 2px;border-radius:12px;
+  gap:3px;padding:12px 2px;border-radius:12px;
   border:2px solid transparent;cursor:pointer;
   transition:all .18s;background:var(--stone);
   position:relative;
@@ -200,7 +200,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 .gb.prop:hover{background:linear-gradient(135deg,#256645,var(--b1));transform:translateY(-1px);}
 .gb.prop .gi{filter:brightness(1.4);}
 .gb.prop .gl{color:#fff;}
-.gi{font-size:20px;line-height:1;}
+.gi{font-size:22px;line-height:1;}
 .gl{font-size:9px;font-weight:800;color:var(--text);text-align:center;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:58px;}
 
 /* Badge notif */
