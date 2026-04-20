@@ -826,7 +826,7 @@ function MainApp({ user, onLogout }) {
   const [showNForm, setShowNForm] = useState(false);
   const [newNews,   setNewNews]   = useState({title:"",asso:"",body:"",image:null});
   const newsImgRef = useRef(null);
-  const [newsTab,      setNewsTab]      = useState("actus");
+  const [newsTab,      setNewsTab]      = useState("agenda");
   const [showAgendaForm, setShowAgendaForm] = useState(false);
   const [newAgenda,    setNewAgenda]    = useState({titre:"",date:"",heure:"",lieu:"",desc:""});
   const [agendaItems,  setAgendaItems]  = useState([
@@ -1393,7 +1393,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
         {/* ══ ACTUALITÉS ══ */}
         {subView==="news" && (<div className="fu">
           <div className="stabs">
-            {[{k:"actus",l:"📰 Actualités"},{k:"agenda",l:"📅 Agenda"},{k:"assos",l:"🏘️ Associations"}].map(t=>(
+            {[{k:"agenda",l:"📅 Agenda"},{k:"actus",l:"📰 Actualités"},{k:"assos",l:"🏘️ Associations"}].map(t=>(
               <button key={t.k} className={`stab ${newsTab===t.k?"act":""}`} onClick={()=>setNewsTab(t.k)}>{t.l}</button>
             ))}
           </div>
