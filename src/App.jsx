@@ -63,7 +63,7 @@ const SERVICE_CATS = [
   { id: "trajets",  label: "Trajet",   icon: "🚕", color: "#1e6e3a" },
   { id: "courses",  label: "Courses",  icon: "🧺", color: "#1a5c8a" },
   { id: "aide",     label: "Aide",     icon: "⚒️", color: "#2d7a52" },
-  { id: "dons",     label: "Dons",     icon: "♻️", color: "#2b6cb0" },
+  { id: "dons",     label: "Dons/Prêts",     icon: "♻️", color: "#2b6cb0" },
 ];
 
 
@@ -1231,7 +1231,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
         <div style={{display:"grid",gridTemplateColumns:"repeat(5,minmax(0,1fr))",gap:4}}>
          <Btn icon="➡️" label="Trajet"   notif={catN("trajets")}  active={subView==="feed"&&filterCat==="trajets"}  onClick={()=>goCat("trajets")}/>
           <Btn icon="🛒" label="Courses"  notif={catN("courses")}  active={subView==="feed"&&filterCat==="courses"}  onClick={()=>goCat("courses")}/>
-          <Btn icon="♻️" label="Dons"     notif={catN("dons")}     active={subView==="feed"&&filterCat==="dons"}     onClick={()=>goCat("dons")}/>
+          <Btn icon="♻️" label="Dons/Prêts"     notif={catN("dons")}     active={subView==="feed"&&filterCat==="dons"}     onClick={()=>{goCat("dons");setNewOffer({...newOffer,category:"dons"});setShowPublish(true);}}/>
           <Btn icon="🔔" label="Vie locale" notif={nNews}          active={subView==="news"}                          onClick={()=>goSub("news")}/>
           <Btn icon="＋" label="Proposer" propose onClick={()=>{setSubView("feed");setFilterCat("all");setShowPublish(true);}}/>
         </div>
