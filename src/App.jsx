@@ -200,7 +200,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 .gb.prop:hover{background:linear-gradient(135deg,#256645,var(--b1));transform:translateY(-1px);}
 .gb.prop .gi{filter:brightness(1.4);}
 .gb.prop .gl{color:#fff;}
-.gi{font-size:28px;line-height:1;}
+.gi{font-size:34px;line-height:1;}
 .gl{font-size:9px;font-weight:800;color:var(--text);text-align:center;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:58px;}
 
 /* Badge notif */
