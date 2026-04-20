@@ -1274,7 +1274,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                 <div>
                   <label className="fl_">Catégorie</label>
                   <div style={{display:"flex",gap:7,flexWrap:"wrap"}}>
-                    {SERVICE_CATS.map(c=>(
+                    {SERVICE_CATS.filter(c=>filterCat==="dons"?["dons","pret"].includes(c.id):true).map(c=>(
                       <button key={c.id} onClick={()=>setNewOffer({...newOffer,category:c.id})}
                         style={{padding:"7px 13px",borderRadius:20,border:`2px solid ${newOffer.category===c.id?c.color:"#c8ddd0"}`,background:newOffer.category===c.id?c.color+"18":"transparent",color:newOffer.category===c.id?c.color:"#5a7a65",fontSize:12,fontWeight:700,cursor:"pointer",fontFamily:"'Nunito',sans-serif"}}>
                         {c.icon} {c.label}
