@@ -842,6 +842,8 @@ function MainApp({ user, onLogout }) {
   const [seenAlerts, setSeenAlerts] = useState(new Set(SEEN_ALERTS));
   const [signaled,   setSignaled]   = useState([]);
   const [showAForm,  setShowAForm]  = useState(false);
+  const [pretTab,    setPretTab]    = useState("travaux");
+  const [pretDemande,setPretDemande]= useState("");
   const [newAlert,   setNewAlert]   = useState({title:"",body:"",level:"orange",zone:""});
 
   const [toast, setToast] = useState(null);
@@ -1233,7 +1235,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
          <Btn icon="➡️" label="Trajet"   notif={catN("trajets")}  active={subView==="feed"&&filterCat==="trajets"}  onClick={()=>goCat("trajets")}/>
           <Btn icon="🛒" label="Courses"  notif={catN("courses")}  active={subView==="feed"&&filterCat==="courses"}  onClick={()=>goCat("courses")}/>
           <Btn icon="♻️" label="Dons"     notif={catN("dons")}     active={subView==="feed"&&filterCat==="dons"}     onClick={()=>goCat("dons")}/>
-          <Btn icon="🔧" label="Prêt" notif={catN("pret")} active={subView==="feed"&&filterCat==="pret"} onClick={()=>goCat("pret")}/>
+          <Btn icon="🔧" label="Prêt" notif={catN("pret")} active={subView==="feed"&&filterCat==="pret"} onClick={()=>goSub("pret")}/>
           <Btn icon="🔔" label="Vie locale" notif={nNews}          active={subView==="news"}                          onClick={()=>goSub("news")}/>
           <Btn icon="＋" label="Proposer" propose onClick={()=>{setSubView("feed");setFilterCat("all");setNewOffer({...newOffer,category:"trajets"});setShowPublish(true);}}/>
         </div>
@@ -1523,6 +1525,30 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
               <div style={{fontSize:12,fontWeight:700,color:"var(--g2)",marginTop:4}}>04 50 59 01 09 · secretariat@bassy.fr</div>
             </div>
           </>}
+        </div>)}
+
+        {/* ══ PRÊT ══ */}
+        {subView==="pret"&&(<div className="fu">
+          <div className="stitle">🔧 Prêt d'outils</div>
+          <div className="ssub">Demandez un outil à vos voisins</div>
+          <div className="stabs" style={{marginBottom:16}}>
+            {[{k:"travaux",l:"🏗️ Travaux"},{k:"jardinage",l:"🌿 Jardinage"}].map(t=>(
+              <button key={t.k} className={`stab ${pretTab===t.k?"act":""}`} onClick={()=>setPretTab(t.k)}>{t.l}</button>
+            ))}
+          </div>
+          <div className="card" style={{padding:18,border:"2px solid var(--gp)"}}>
+            <div style={{fontFamily:"'Fraunces',serif",fontSize:15,fontWeight:700,marginBottom:12,color:"var(--g1)"}}>Faire une demande</div>
+            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+              <div><label className="fl_">Outil recherché</label><input className="fi" placeholder={pretTab==="travaux"?"Ex : perceuse, échelle, bétonneuse…":"Ex : tondeuse, taille-haie, brouette…"} value={pretDemande} onChange={e=>setPretDemande(e.target.value)}/></div>
+              <button className="bm" style={{margin:0}} onClick={async()=>{
+                if(!pretDemande.trim()){showToast("⚠️ Décris l'outil recherché");return;}
+                const {error}=await supabase.from("offers").insert({author_id:user.id,category:"pret",title:pretDemande,description:pretTab,date:"À définir",time:"",spots:1,taken:0});
+                if(error){showToast("❌ Erreur");return;}
+                showToast("✅ Demande publiée !");
+                setPretDemande("");
+              }}>Publier ma demande</button>
+            </div>
+          </div>
         </div>)}
 
         {/* ══ VIGILANCE ══ */}
