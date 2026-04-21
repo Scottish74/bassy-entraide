@@ -1662,7 +1662,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                 <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:8}}>
                   {offer.date&&<span style={{fontSize:12,background:"var(--stone)",borderRadius:20,padding:"3px 10px"}}>📅 {offer.date}</span>}
                   {offer.time&&<span style={{fontSize:12,background:"var(--stone)",borderRadius:20,padding:"3px 10px"}}>🕐 {offer.time}</span>}
-                  {offer.spots&&<span style={{fontSize:12,background:"var(--stone)",borderRadius:20,padding:"3px 10px"}}>👥 {offer.taken||0}/{offer.spots} place{offer.spots>1?"s":""}</span>}
+                  {offer.spots&&offer.category!=="courses"&&<span style={{fontSize:12,background:"var(--stone)",borderRadius:20,padding:"3px 10px"}}>👥 {offer.taken||0}/{offer.spots} place{offer.spots>1?"s":""}</span>}
                 </div>
                 <div className="pb"><div className="pf" style={{width:`${pct}%`,background:isFull?"#e05c5c":"linear-gradient(90deg,var(--g2),var(--b2))"}}/></div>
                 {!isMine&&!isFull&&<button className="bp" style={{marginTop:8,fontSize:12}} onClick={()=>{const k=getConvKey(user.id,offer.authorId);if(!conversations[k]){setConversations(p=>({...p,[k]:{id:k,participants:[user.id,offer.authorId],offerId:offer.id,messages:[]}}));}setActiveConv(k);}}>💬 Je suis intéressé</button>}
