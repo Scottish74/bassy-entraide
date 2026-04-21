@@ -1232,10 +1232,10 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
         <div style={{display:"grid",gridTemplateColumns:"repeat(6,minmax(0,1fr))",gap:4}}>
          <Btn icon="➡️" label="Trajet"   notif={catN("trajets")}  active={subView==="feed"&&filterCat==="trajets"}  onClick={()=>goCat("trajets")}/>
           <Btn icon="🛒" label="Courses"  notif={catN("courses")}  active={subView==="feed"&&filterCat==="courses"}  onClick={()=>goCat("courses")}/>
-          <Btn icon="♻️" label="Dons"     notif={catN("dons")}     active={subView==="feed"&&filterCat==="dons"}     onClick={()=>{goCat("dons");setNewOffer({...newOffer,category:"dons"});setShowPublish(true);}}/>
+          <Btn icon="♻️" label="Dons"     notif={catN("dons")}     active={subView==="feed"&&filterCat==="dons"}     onClick={()=>goCat("dons")}/>
           <Btn icon="🔧" label="Prêt" notif={catN("pret")} active={subView==="feed"&&filterCat==="pret"} onClick={()=>goCat("pret")}/>
           <Btn icon="🔔" label="Vie locale" notif={nNews}          active={subView==="news"}                          onClick={()=>goSub("news")}/>
-          <Btn icon="＋" label="Proposer" propose onClick={()=>{setSubView("feed");setFilterCat("all");setShowPublish(true);}}/>
+          <Btn icon="＋" label="Proposer" propose onClick={()=>{setSubView("feed");setFilterCat("all");setNewOffer({...newOffer,category:"trajets"});setShowPublish(true);}}/>
         </div>
       </div>
 
