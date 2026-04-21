@@ -1271,7 +1271,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                 <button onClick={()=>setShowPublish(false)} style={{background:"none",border:"none",fontSize:18,cursor:"pointer",color:"var(--muted)"}}>✕</button>
               </div>
               <div style={{display:"flex",flexDirection:"column",gap:13}}>
-                <div>
+                {newOffer.category!=="dons"&&<div>
                   <label className="fl_">Catégorie</label>
                   <div style={{display:"flex",gap:7,flexWrap:"wrap"}}>
                     {SERVICE_CATS.filter(c=>filterCat==="dons"?["dons","pret"].includes(c.id):true).map(c=>(
@@ -1281,7 +1281,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                       </button>
                     ))}
                   </div>
-                </div>
+                </div>}
                 <div><label className="fl_">Titre</label><input className="fi" placeholder="Ex : Je vais au Super U de Frangy samedi…" value={newOffer.title} onChange={e=>setNewOffer({...newOffer,title:e.target.value})}/></div>
                 {newOffer.category!=="dons"&&<div><label className="fl_">Description</label><textarea className="fi" rows={3} placeholder="Détails, conditions, zone couverte…" value={newOffer.description} onChange={e=>setNewOffer({...newOffer,description:e.target.value})}/></div>}
                 <div style={{marginBottom:12}}>
