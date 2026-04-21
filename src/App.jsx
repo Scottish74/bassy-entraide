@@ -843,6 +843,7 @@ function MainApp({ user, onLogout }) {
   const [showAForm,  setShowAForm]  = useState(false);
   const [pretTab,    setPretTab]    = useState("travaux");
   const [pretDemande,setPretDemande]= useState("");
+  const [trajetForm, setTrajetForm] = useState({de:"",a:"",date:"",heure:"",places:1});
   const [newAlert,   setNewAlert]   = useState({title:"",body:"",level:"orange",zone:""});
 
   const [toast, setToast] = useState(null);
@@ -1231,7 +1232,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
       {/* ── LIGNE 1 : 4 boutons de services + Proposer ── */}
       <div className="row-block">
         <div style={{display:"grid",gridTemplateColumns:"repeat(6,minmax(0,1fr))",gap:4}}>
-         <Btn icon="➡️" label="Trajet"   notif={catN("trajets")}  active={subView==="feed"&&filterCat==="trajets"}  onClick={()=>{goCat("trajets");}}/>
+         <Btn icon="➡️" label="Trajet"   notif={catN("trajets")}  active={subView==="trajets"}  onClick={()=>goSub("trajets")}/>
           <Btn icon="🛒" label="Courses"  notif={catN("courses")}  active={subView==="feed"&&filterCat==="courses"}  onClick={()=>goCat("courses")}/>
           <Btn icon="♻️" label="Dons"     notif={catN("dons")}     active={subView==="feed"&&filterCat==="dons"}     onClick={()=>goCat("dons")}/>
           <Btn icon="🔧" label="Prêt" notif={catN("pret")} active={subView==="feed"&&filterCat==="pret"} onClick={()=>goSub("pret")}/>
@@ -1540,6 +1541,32 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
           </>}
         </div>)}
 
+        {/* ══ TRAJETS ══ */}
+        {subView==="trajets"&&(<div className="fu">
+          <div className="stitle">➡️ Trajets partagés</div>
+          <div className="ssub">Proposez ou rejoignez un trajet</div>
+          <div className="card" style={{padding:18,border:"2px solid var(--gp)",marginBottom:14}}>
+            <div style={{fontFamily:"'Fraunces',serif",fontSize:15,fontWeight:700,marginBottom:12,color:"var(--g1)"}}>➕ Proposer un trajet</div>
+            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+              <div className="g2">
+                <div><label className="fl_">De</label><input className="fi" placeholder="Bassy, Frangy…" value={trajetForm.de} onChange={e=>setTrajetForm({...trajetForm,de:e.target.value})}/></div>
+                <div><label className="fl_">À</label><input className="fi" placeholder="Annecy, Genève…" value={trajetForm.a} onChange={e=>setTrajetForm({...trajetForm,a:e.target.value})}/></div>
+              </div>
+              <div className="g2">
+                <div><label className="fl_">Date</label><input className="fi" type="date" value={trajetForm.date} onChange={e=>setTrajetForm({...trajetForm,date:e.target.value})}/></div>
+                <div><label className="fl_">Heure</label><input className="fi" type="time" value={trajetForm.heure} onChange={e=>setTrajetForm({...trajetForm,heure:e.target.value})}/></div>
+              </div>
+              <div><label className="fl_">Places disponibles</label><input className="fi" type="number" min={1} max={8} value={trajetForm.places} onChange={e=>setTrajetForm({...trajetForm,places:e.target.value})}/></div>
+              <button className="bm" style={{margin:0}} onClick={async()=>{
+                if(!trajetForm.de||!trajetForm.a){showToast("⚠️ Départ et destination requis");return;}
+                const {data,error}=await supabase.from("offers").insert({author_id:user.id,category:"trajets",title:`${trajetForm.de} → ${trajetForm.a}`,description:"",date:trajetForm.date||"À définir",time:trajetForm.heure||"",spots:parseInt(trajetForm.places)||1,taken:0}).select().single();
+                if(error){showToast("❌ Erreur");return;}
+                showToast("🎉 Trajet publié !");
+                setTrajetForm({de:"",a:"",date:"",heure:"",places:1});
+              }}>Publier le trajet</button>
+            </div>
+          </div>
+        </div>)}
         {/* ══ PRÊT ══ */}
         {subView==="pret"&&(<div className="fu">
           <div className="stitle">🔧 Prêt d'outils</div>
