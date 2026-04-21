@@ -1267,7 +1267,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
           {showPublish&&(
             <div className="card fu" style={{padding:20,border:"2px solid var(--gp)",marginBottom:14}}>
               <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:13}}>
-                <div style={{fontFamily:"'Fraunces',serif",fontSize:17,fontWeight:700,color:"var(--g1)"}}>Proposer un service</div>
+                <div style={{fontFamily:"'Fraunces',serif",fontSize:17,fontWeight:700,color:"var(--g1)"}}>{newOffer.category==="dons" ? "Faire un don" : "Proposer un service"}</div>
                 <button onClick={()=>setShowPublish(false)} style={{background:"none",border:"none",fontSize:18,cursor:"pointer",color:"var(--muted)"}}>✕</button>
               </div>
               <div style={{display:"flex",flexDirection:"column",gap:13}}>
