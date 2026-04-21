@@ -1361,7 +1361,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                 </div>
                 <div style={{marginBottom:11}}>
                   <div style={{display:"flex",justifyContent:"space-between",marginBottom:4,fontSize:11,fontWeight:700,color:"#5a7a65"}}>
-                    <span>{offer.taken}/{offer.spots} place{offer.spots>1?"s":""}</span>
+                    <span>👥 {offer.taken}/{offer.spots} place{offer.spots>1?"s":""}</span>
                     <span style={{color:isFull?"#e05c5c":"#2d7a52"}}>{isFull?"Complet":`${offer.spots-offer.taken} dispo`}</span>
                   </div>
                   <div className="pb"><div className="pf" style={{width:`${pct}%`,background:isFull?"#e05c5c":"linear-gradient(90deg,var(--g2),var(--b2))"}}/></div>
