@@ -1575,7 +1575,9 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                 const {error}=await supabase.from("offers").insert({author_id:user.id,category:"courses",title:coursesForm.magasin,description:coursesForm.secteur,date:coursesForm.date||"À définir",time:"",spots:1,taken:0});
                 if(error){showToast("❌ Erreur");return;}
                 showToast("🎉 Courses publiées !");
-                setCoursesForm({magasin:"",secteur:"Tout le village",date:""});
+                setCoursesForm({magasin:"",secteur:"Tout le village",date:"",heure:"",autreMagasin:""});
+                const {data:newOffers} = await supabase.from("offers").select("id, author_id, category, title, description, date, time, spots, taken, created_at, image_url, profiles(name, prenom, nom, avatar, verified, role, badges)").order("created_at",{ascending:false});
+                if(newOffers) setOffers(newOffers.map(o=>({id:o.id,authorId:o.author_id,author:o.profiles?{id:o.author_id,name:(o.profiles.name||`${o.profiles.prenom||""} ${o.profiles.nom||""}`.trim())||"Voisin",avatar:`${(o.profiles.prenom||"?")[0]}${(o.profiles.nom||"")[0]||""}`.toUpperCase(),verified:o.profiles.verified||false,role:o.profiles.role||"membre",badges:o.profiles.badges||[]}:{id:o.author_id,name:"Voisin",avatar:"??",verified:false,role:"membre",badges:[]},category:o.category,title:o.title,description:o.description,date:o.date,time:o.time,spots:o.spots||1,taken:o.taken||0,image:o.image_url||null,createdAt:new Date(o.created_at).getTime()})));
               }}>Publier</button>
             </div>
           </div>
