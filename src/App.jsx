@@ -63,7 +63,7 @@ const SERVICE_CATS = [
   { id: "trajets",  label: "Trajet",   icon: "🚕", color: "#1e6e3a" },
   { id: "courses",  label: "Courses",  icon: "🧺", color: "#1a5c8a" },
   { id: "aide",     label: "Aide",     icon: "⚒️", color: "#2d7a52" },
-  { id: "dons",     label: "Dons/Prêts",     icon: "♻️", color: "#2b6cb0" },
+  { id: "dons",     label: "Dons",     icon: "♻️", color: "#2b6cb0" },
   { id: "pret",     label: "Prêt",            icon: "🔧", color: "#7c4d00" },
 ];
 
