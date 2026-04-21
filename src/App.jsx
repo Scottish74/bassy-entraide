@@ -844,7 +844,7 @@ function MainApp({ user, onLogout }) {
   const [pretTab,    setPretTab]    = useState("travaux");
   const [pretDemande,setPretDemande]= useState("");
   const [trajetForm, setTrajetForm] = useState({de:"",a:"",date:"",heure:"",places:1});
-  const [coursesForm, setCoursesForm] = useState({magasin:"",secteur:"Tout le village",date:""});
+  const [coursesForm, setCoursesForm] = useState({magasin:"",secteur:"Tout le village",date:"",heure:"",autreMagasin:""});
   const [newAlert,   setNewAlert]   = useState({title:"",body:"",level:"orange",zone:""});
 
   const [toast, setToast] = useState(null);
@@ -1553,8 +1553,8 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                 <label className="fl_">Magasin</label>
                 <select className="fi" value={coursesForm.magasin} onChange={e=>setCoursesForm({...coursesForm,magasin:e.target.value})} style={{cursor:"pointer"}}>
                   <option value="">Choisir un magasin…</option>
-                  <option value="Boulangerie Chevalier">🥖 Boulangerie Chevalier</option>
                   <option value="Carrefour Market Seyssel">🛒 Carrefour Market Seyssel</option>
+                  <option value="Boulangerie Chevalier">🥖 Boulangerie Chevalier</option>
                   <option value="Tabac de Seyssel">🗞️ Tabac de Seyssel</option>
                   <option value="Autre">📍 Autre</option>
                 </select>
@@ -1565,7 +1565,11 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                   {SECTEURS_BASSY.map(s=><option key={s} value={s}>{s}</option>)}
                 </select>
               </div>
-              <div><label className="fl_">Date</label><input className="fi" type="date" value={coursesForm.date} onChange={e=>setCoursesForm({...coursesForm,date:e.target.value})}/></div>
+              <div className="g2">
+                <div><label className="fl_">Date</label><input className="fi" type="date" value={coursesForm.date} onChange={e=>setCoursesForm({...coursesForm,date:e.target.value})}/></div>
+                <div><label className="fl_">Heure</label><input className="fi" type="time" value={coursesForm.heure||""} onChange={e=>setCoursesForm({...coursesForm,heure:e.target.value})}/></div>
+              </div>
+              {coursesForm.magasin==="Autre"&&<div><label className="fl_">Précisez</label><input className="fi" placeholder="Nom du magasin…" value={coursesForm.autreмагazin||""} onChange={e=>setCoursesForm({...coursesForm,autreМagasin:e.target.value})}/></div>}
               <button className="bm" style={{margin:0}} onClick={async()=>{
                 if(!coursesForm.magasin){showToast("⚠️ Choisis un magasin");return;}
                 const {error}=await supabase.from("offers").insert({author_id:user.id,category:"courses",title:coursesForm.magasin,description:coursesForm.secteur,date:coursesForm.date||"À définir",time:"",spots:1,taken:0});
