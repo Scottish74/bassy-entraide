@@ -1285,7 +1285,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                     ))}
                   </div>
                 </div>}
-                <div><label className="fl_">Titre</label><input className="fi" placeholder="Ex : Je vais au Super U de Frangy samedi…" value={newOffer.title} onChange={e=>setNewOffer({...newOffer,title:e.target.value})}/></div>
+                <div><label className="fl_">Titre</label><input className="fi" placeholder={newOffer.category==="dons" ? "Ex : meuble, vélo, livres…" : "Ex : Covoiturage Bassy → Annecy…"} value={newOffer.title} onChange={e=>setNewOffer({...newOffer,title:e.target.value})}/></div>
                 {newOffer.category!=="dons"&&<div><label className="fl_">Description</label><textarea className="fi" rows={3} placeholder="Détails, conditions, zone couverte…" value={newOffer.description} onChange={e=>setNewOffer({...newOffer,description:e.target.value})}/></div>}
                 <div style={{marginBottom:12}}>
                   <label className="fl_">Secteur</label>
