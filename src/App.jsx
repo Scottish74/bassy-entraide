@@ -1609,6 +1609,38 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
               }}>Publier le trajet</button>
             </div>
           </div>
+          {/* Liste des trajets */}
+          {offers.filter(o=>o.category==="trajets").length===0?(
+            <div style={{textAlign:"center",padding:"30px 0",color:"var(--muted)"}}>
+              <div style={{fontSize:36,marginBottom:8}}>🚗</div>
+              <div style={{fontFamily:"'Fraunces',serif",fontSize:15,color:"var(--g1)"}}>Aucun trajet pour l'instant</div>
+            </div>
+          ):offers.filter(o=>o.category==="trajets").map(offer=>{
+            const author = offer.author||userOf(offer.authorId)||{name:"Voisin",avatar:"?",verified:false,role:"membre",badges:[]};
+            const isMine = offer.authorId===user.id;
+            const isFull = offer.taken>=offer.spots;
+            const pct = Math.round((offer.taken/offer.spots)*100);
+            return (
+              <div key={offer.id} className="card">
+                <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}>
+                  <div className="av">{author.avatar}</div>
+                  <div style={{flex:1}}>
+                    <span style={{fontWeight:800,fontSize:13}}>{author.name}</span>
+                    {isMine&&<span style={{fontSize:10,fontWeight:800,background:"#fff3cd",color:"#92620a",borderRadius:20,padding:"2px 7px",marginLeft:6}}>Votre offre</span>}
+                  </div>
+                </div>
+                <div style={{fontWeight:800,fontSize:15,marginBottom:4}}>{offer.title}</div>
+                <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:8}}>
+                  {offer.date&&<span style={{fontSize:12,background:"var(--stone)",borderRadius:20,padding:"3px 10px"}}>📅 {offer.date}</span>}
+                  {offer.time&&<span style={{fontSize:12,background:"var(--stone)",borderRadius:20,padding:"3px 10px"}}>🕐 {offer.time}</span>}
+                  {offer.spots&&<span style={{fontSize:12,background:"var(--stone)",borderRadius:20,padding:"3px 10px"}}>👥 {offer.taken||0}/{offer.spots} place{offer.spots>1?"s":""}</span>}
+                </div>
+                <div className="pb"><div className="pf" style={{width:`${pct}%`,background:isFull?"#e05c5c":"linear-gradient(90deg,var(--g2),var(--b2))"}}/></div>
+                {!isMine&&!isFull&&<button className="bp" style={{marginTop:8,fontSize:12}} onClick={()=>{const k=getConvKey(user.id,offer.authorId);if(!conversations[k]){setConversations(p=>({...p,[k]:{id:k,participants:[user.id,offer.authorId],offerId:offer.id,messages:[]}}));}setActiveConv(k);}}>💬 Je suis intéressé</button>}
+                {isMine&&<button className="sb" style={{marginTop:8}} onClick={async()=>{await supabase.from("offers").delete().eq("id",offer.id);setOffers(p=>p.filter(o=>o.id!==offer.id));showToast("🗑️ Trajet supprimé.");}}>🗑️ Supprimer</button>}
+              </div>
+            );
+          })}
         </div>)}
         {/* ══ PRÊT ══ */}
         {subView==="pret"&&(<div className="fu">
