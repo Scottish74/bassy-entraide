@@ -844,6 +844,7 @@ function MainApp({ user, onLogout }) {
   const [pretTab,    setPretTab]    = useState("travaux");
   const [pretDemande,setPretDemande]= useState("");
   const [trajetForm, setTrajetForm] = useState({de:"",a:"",date:"",heure:"",places:1});
+  const [coursesForm, setCoursesForm] = useState({magasin:"",secteur:"Tout le village",date:""});
   const [newAlert,   setNewAlert]   = useState({title:"",body:"",level:"orange",zone:""});
 
   const [toast, setToast] = useState(null);
@@ -1233,7 +1234,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
       <div className="row-block">
         <div style={{display:"grid",gridTemplateColumns:"repeat(6,minmax(0,1fr))",gap:4}}>
          <Btn icon="➡️" label="Trajet"   notif={catN("trajets")}  active={subView==="trajets"}  onClick={()=>goSub("trajets")}/>
-          <Btn icon="🛒" label="Courses"  notif={catN("courses")}  active={subView==="feed"&&filterCat==="courses"}  onClick={()=>goCat("courses")}/>
+          <Btn icon="🛒" label="Courses"  notif={catN("courses")}  active={subView==="courses"}  onClick={()=>goSub("courses")}/>
           <Btn icon="♻️" label="Dons"     notif={catN("dons")}     active={subView==="feed"&&filterCat==="dons"}     onClick={()=>goCat("dons")}/>
           <Btn icon="🔧" label="Prêt" notif={catN("pret")} active={subView==="feed"&&filterCat==="pret"} onClick={()=>goSub("pret")}/>
           <Btn icon="🔔" label="Vie locale" notif={nNews}          active={subView==="news"}                          onClick={()=>goSub("news")}/>
@@ -1541,6 +1542,40 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
           </>}
         </div>)}
 
+        {/* ══ COURSES ══ */}
+        {subView==="courses"&&(<div className="fu">
+          <div className="stitle">🛒 Courses mutualisées</div>
+          <div className="ssub">Proposez de faire les courses pour vos voisins</div>
+          <div className="card" style={{padding:18,border:"2px solid var(--gp)",marginBottom:14}}>
+            <div style={{fontFamily:"'Fraunces',serif",fontSize:15,fontWeight:700,marginBottom:12,color:"var(--g1)"}}>➕ Proposer des courses</div>
+            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+              <div>
+                <label className="fl_">Magasin</label>
+                <select className="fi" value={coursesForm.magasin} onChange={e=>setCoursesForm({...coursesForm,magasin:e.target.value})} style={{cursor:"pointer"}}>
+                  <option value="">Choisir un magasin…</option>
+                  <option value="Boulangerie Chevalier">🥖 Boulangerie Chevalier</option>
+                  <option value="Carrefour Market Seyssel">🛒 Carrefour Market Seyssel</option>
+                  <option value="Tabac de Seyssel">🗞️ Tabac de Seyssel</option>
+                  <option value="Autre">📍 Autre</option>
+                </select>
+              </div>
+              <div>
+                <label className="fl_">Secteur</label>
+                <select className="fi" value={coursesForm.secteur} onChange={e=>setCoursesForm({...coursesForm,secteur:e.target.value})} style={{cursor:"pointer"}}>
+                  {SECTEURS_BASSY.map(s=><option key={s} value={s}>{s}</option>)}
+                </select>
+              </div>
+              <div><label className="fl_">Date</label><input className="fi" type="date" value={coursesForm.date} onChange={e=>setCoursesForm({...coursesForm,date:e.target.value})}/></div>
+              <button className="bm" style={{margin:0}} onClick={async()=>{
+                if(!coursesForm.magasin){showToast("⚠️ Choisis un magasin");return;}
+                const {error}=await supabase.from("offers").insert({author_id:user.id,category:"courses",title:coursesForm.magasin,description:coursesForm.secteur,date:coursesForm.date||"À définir",time:"",spots:1,taken:0});
+                if(error){showToast("❌ Erreur");return;}
+                showToast("🎉 Courses publiées !");
+                setCoursesForm({magasin:"",secteur:"Tout le village",date:""});
+              }}>Publier</button>
+            </div>
+          </div>
+        </div>)}
         {/* ══ TRAJETS ══ */}
         {subView==="trajets"&&(<div className="fu">
           <div className="stitle">➡️ Trajets partagés</div>
