@@ -1231,7 +1231,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
       {/* ── LIGNE 1 : 4 boutons de services + Proposer ── */}
       <div className="row-block">
         <div style={{display:"grid",gridTemplateColumns:"repeat(6,minmax(0,1fr))",gap:4}}>
-         <Btn icon="➡️" label="Trajet"   notif={catN("trajets")}  active={subView==="feed"&&filterCat==="trajets"}  onClick={()=>goCat("trajets")}/>
+         <Btn icon="➡️" label="Trajet"   notif={catN("trajets")}  active={subView==="feed"&&filterCat==="trajets"}  onClick={()=>{goCat("trajets");}}/>
           <Btn icon="🛒" label="Courses"  notif={catN("courses")}  active={subView==="feed"&&filterCat==="courses"}  onClick={()=>goCat("courses")}/>
           <Btn icon="♻️" label="Dons"     notif={catN("dons")}     active={subView==="feed"&&filterCat==="dons"}     onClick={()=>goCat("dons")}/>
           <Btn icon="🔧" label="Prêt" notif={catN("pret")} active={subView==="feed"&&filterCat==="pret"} onClick={()=>goSub("pret")}/>
@@ -1387,8 +1387,22 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
           {!offersLoading && filtered.length===0&&!showPublish&&(
             <div style={{textAlign:"center",padding:"40px 0",color:"var(--muted)"}}>
               <div style={{fontSize:36,marginBottom:10}}>🌿</div>
-              <div style={{fontFamily:"'Fraunces',serif",fontSize:16,color:"var(--g1)",marginBottom:8}}>Aucun service dans cette catégorie</div>
-              <button className="bp" onClick={()=>setShowPublish(true)}>Proposer le premier</button>
+              <div style={{fontFamily:"'Fraunces',serif",fontSize:16,color:"var(--g1)",marginBottom:8}}>
+                {filterCat==="trajets"&&"Aucun trajet proposé pour l'instant"}
+                {filterCat==="courses"&&"Aucune course proposée pour l'instant"}
+                {filterCat==="dons"&&"Aucun don disponible pour l'instant"}
+                {filterCat==="all"&&"Aucun service pour l'instant"}
+              </div>
+              <button className="bp" onClick={()=>{
+                if(filterCat==="dons"){setNewOffer({...newOffer,category:"dons"});}
+                else if(filterCat!=="all"){setNewOffer({...newOffer,category:filterCat});}
+                setShowPublish(true);
+              }}>
+                {filterCat==="trajets"&&"Proposer un trajet"}
+                {filterCat==="courses"&&"Proposer des courses"}
+                {filterCat==="dons"&&"Faire un don"}
+                {filterCat==="all"&&"Proposer le premier"}
+              </button>
             </div>
           )}
         </div>)}
