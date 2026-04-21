@@ -1555,7 +1555,7 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                   <option value="">Choisir un magasin…</option>
                   <option value="Carrefour Market Seyssel">🛒 Carrefour Market Seyssel</option>
                   <option value="Boulangerie Chevalier">🥖 Boulangerie Chevalier</option>
-                  <option value="Tabac de Seyssel">🗞️ Tabac de Seyssel</option>
+                  <option value="Tabac de Seyssel">🗞️ Tabac de Seyssel</option><option value="Pharmacie de Seyssel">💊 Pharmacie de Seyssel</option>
                   <option value="Autre">📍 Autre</option>
                 </select>
               </div>
