@@ -168,8 +168,7 @@ html,body{height:100%;overscroll-behavior:none;overflow-x:hidden;width:100%;max-
 .hero{position:relative;overflow:hidden;height:auto;min-height:160px;padding-top:env(safe-area-inset-top);}
 .hero img.bg{width:100%;height:100%;object-fit:cover;display:block;}
 .hov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,77,53,.42) 0%,rgba(26,58,92,.82) 100%);}
-.hc{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px 12px;}
-.ht{display:flex;align-items:center;justify-content:space-between;}
+.hc{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px 12px;padding-top:max(10px,env(safe-area-inset-top));}.ht{display:flex;align-items:center;justify-content:space-between;}
 .hlogo{width:42px;height:42px;object-fit:contain;}
 .hn{font-family:'Fraunces',serif;font-size:16px;color:#fff;font-weight:700;line-height:1.15;}
 .hv{font-size:9px;color:rgba(255,255,255,.65);font-weight:600;display:none;}
