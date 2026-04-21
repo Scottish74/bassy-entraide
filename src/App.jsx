@@ -1290,10 +1290,10 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                     {SECTEURS_BASSY.map(s=><option key={s} value={s}>{s}</option>)}
                   </select>
                 </div>
-                <div className="g2">
+                {newOffer.category!=="dons"&&<div className="g2">
                   <div><label className="fl_">Date</label><input className="fi" type="date" value={newOffer.date} onChange={e=>setNewOffer({...newOffer,date:e.target.value})}/></div>
                   <div><label className="fl_">Heure</label><input className="fi" type="time" value={newOffer.time} onChange={e=>setNewOffer({...newOffer,time:e.target.value})}/></div>
-                </div>
+                </div>}
                 {newOffer.category==="dons"&&(
                   <div>
                     <label className="fl_">Photo du don</label>
@@ -1319,9 +1319,9 @@ setNewOffer({title:"",category:"trajets",description:"",date:"",time:"",spots:1,
                     }}/>
                   </div>
                 )}
-                
-                <div><label className="fl_">Places disponibles</label><input className="fi" type="number" min={1} max={20} value={newOffer.spots} onChange={e=>setNewOffer({...newOffer,spots:e.target.value})}/></div>
-                <button className="bm" style={{fontSize:14,margin:0}} onClick={publishOffer}>Publier aux voisins</button>
+                <>
+                {newOffer.category!=="dons"&&<div><label className="fl_">Places disponibles</label><input className="fi" type="number" min={1} max={20} value={newOffer.spots} onChange={e=>setNewOffer({...newOffer,spots:e.target.value})}/></div>}
+                <button className="bm" style={{fontSize:14,margin:0}} onClick={publishOffer}>Publier aux voisins</button></>
               </div>
             </div>
           )}
