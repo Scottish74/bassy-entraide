@@ -1059,7 +1059,7 @@ function MainApp({ user, onLogout }) {
     if("setAppBadge" in navigator) navigator.setAppBadge(1).catch(()=>{});
   };
   const publishOffer=async()=>{
-    if(!newOffer.title||!newOffer.description){showToast("⚠️ Titre et description requis.");return;}
+    if(!newOffer.title||(newOffer.category!=="dons"&&!newOffer.description)){showToast("⚠️ Titre et description requis.");return;}
     // Écriture dans Supabase
     const { data, error } = await supabase.from("offers").insert({
       author_id: user.id,
